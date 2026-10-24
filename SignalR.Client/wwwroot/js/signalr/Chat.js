@@ -17,6 +17,7 @@ if (!sendButton || !status || !userInput || !messageInput || !messagesList) {
 
 connection.on("ReceiveMessage", (message) => {
     const item = document.createElement("li");
+    const time = new Date(message.sentAt).toLocaleTimeString();
     item.textContent = `${message.user}: ${message.message}`;
     messagesList.appendChild(item);
 });

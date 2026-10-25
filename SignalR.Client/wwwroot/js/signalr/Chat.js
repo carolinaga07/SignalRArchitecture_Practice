@@ -10,6 +10,11 @@ const status = document.getElementById("status");
 const userInput = document.getElementById("userInput");
 const messageInput = document.getElementById("messageInput");
 const messagesList = document.getElementById("messageList");
+const roomSelect = document.getElementById("roomSelect");
+
+async function joinRoom() {
+    await connection.invoke("JoinRoom", roomSelect.value);
+}
 
 if (!sendButton || !status || !userInput || !messageInput || !messagesList) {
     throw new Error("Faltan elementos del chat en la página.");
@@ -27,14 +32,16 @@ connection.onreconnecting(() => {
     sendButton.disabled = true;
 });
 
-connection.onreconnected(() => {
+connection.onreconnected( async () => {
     status.textContent = "Conectado";
     sendButton.disabled = false;
+    await joinRoom();
 });
 
 async function startConnection() {
     try {
         await connection.start();
+        await joinRoom();
         status.textContent = "Conectado";
         sendButton.disabled = false;
     } catch (error) {

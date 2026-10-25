@@ -35,6 +35,15 @@ public sealed class ChatHub: Microsoft.AspNetCore.SignalR.Hub
         await Groups.AddToGroupAsync(Context.ConnectionId, room.Trim());
     }
 
+    public async Task LeaveRoom(string room)
+    {
+        if (string.IsNullOrWhiteSpace(room))
+        {
+            throw new HubException("La sala no es calida");
+        }
+        await Groups.RemoveFromGroupAsync(Context.ConnectionId, room.Trim());
+    }
+
     public async Task SendMessageToRoom(string room, string user, string message)
     {
         if(string.IsNullOrWhiteSpace(room) ||

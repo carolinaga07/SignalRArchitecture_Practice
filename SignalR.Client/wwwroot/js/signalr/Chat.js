@@ -11,9 +11,11 @@ const userInput = document.getElementById("userInput");
 const messageInput = document.getElementById("messageInput");
 const messagesList = document.getElementById("messageList");
 const roomSelect = document.getElementById("roomSelect");
+let currentRoom = roomSelect.value;
 
 async function joinRoom() {
     await connection.invoke("JoinRoom", roomSelect.value);
+    currentRoom = roomSelect.value;
 }
 
 if (!sendButton || !status || !userInput || !messageInput || !messagesList) {
@@ -37,6 +39,11 @@ connection.onreconnected( async () => {
     sendButton.disabled = false;
     await joinRoom();
 });
+
+roomSelect.addEventListener("change", async () => {
+    await connection.invoke("LeaveRoom", currentRoom);
+    await joinRoom();
+})
 
 async function startConnection() {
     try {
@@ -65,7 +72,7 @@ sendButton.addEventListener("click", async () => {
     }
 
     try {
-        await connection.invoke("SendMessage", user, message);
+        await connection.invoke("SendMessageToRoom", roomSelect.value, user, message);
         messageInput.value = "";
     } catch (error) {
         console.error("No se pudo enviar el mensaje:", error);

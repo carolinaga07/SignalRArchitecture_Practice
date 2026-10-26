@@ -22,3 +22,6 @@ dotnet run --project SignalR.Hub --urls https://localhost:7001
 # 4. Ejecutar el Cliente (SignalR.Client):
 Abre una segunda terminal y ejecuta:
 dotnet run --project SignalR.Client --urls https://localhost:7002
+
+# 5. Abrir la ruta 2 veces en el navegador: 
+https://localhost:7002/Orders

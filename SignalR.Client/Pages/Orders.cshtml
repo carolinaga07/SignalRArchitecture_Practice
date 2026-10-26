@@ -1,0 +1,24 @@
+﻿@page
+
+@{
+    ViewData["Title"] = "Pedidos en vivo";
+}
+<h1>Pedidos en vivo</h1>
+<div>
+    <label for="orderIdInput">Numero de pedido</label>
+    <input id="orderIdInput" type="number" min="1" />
+</div>
+<div>
+    <label for="statusSelect">Estado</label>
+    <select id="statusSelect">
+        <option value="Pendiente">Pendiente</option>
+        <option value="EnPreparacion">En preparacion</option>
+        <option value="Enviado">Enviado</option>
+        <option value="Entregado">Entregado</option>
+    </select>
+</div>
+<button id="updateButton" disabled>Actualizar estado</button>
+<p id="status">Conectando...</p>
+<ul id="ordersList"></ul>
+<script src="~/js/signalr/dist/browser/signalr.min.js"></script>
+<script src="~/js/orders.js"></script>

@@ -1,3 +1,4 @@
+using SignalR.Hub.Hubs;
 using SignalR.HubServer.Hubs;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -19,5 +20,6 @@ app.UseRouting();
 app.UseCors("ClientPolicy");
 
 app.MapHub<ChatHub>("/chathub");
+app.MapHub<OrderHub>("/orderHub");
 
 app.Run();

@@ -1,7 +1,9 @@
-﻿using Microsoft.AspNetCore.SignalR;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.SignalR;
 using SignalR.Shared.Contracts;
 
 namespace SignalR.HubServer.Hubs;
+
 
 public sealed class ChatHub: Microsoft.AspNetCore.SignalR.Hub
 {
